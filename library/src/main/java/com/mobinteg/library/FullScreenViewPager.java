@@ -17,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -41,6 +42,11 @@ public class FullScreenViewPager extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+     //   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+     //   if(getActionBar()!=null)
+    //        getActionBar().hide();
+
         setContentView(R.layout.activity_full_screen_view_pager);
 
         context = this;
@@ -54,7 +60,6 @@ public class FullScreenViewPager extends AppCompatActivity {
         upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         slideUpIn = AnimationUtils.loadAnimation(this, R.anim.slide_up_in);
         slideDownOut = AnimationUtils.loadAnimation(this, R.anim.slide_down_out);

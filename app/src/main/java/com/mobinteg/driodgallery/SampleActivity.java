@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.mobinteg.library.FullScreenViewPager;
@@ -20,11 +21,15 @@ public class SampleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+ //        getActionBar().hide();
+
         setContentView(R.layout.activity_sample);
 
         context = this;
 
-        final ArrayList<String> imgArray = new ArrayList<String>();
+        final ArrayList<String> imgArray = new ArrayList<>();
 
         for (int i = 0; i < 50; i++) {
             Random rand = new Random();
