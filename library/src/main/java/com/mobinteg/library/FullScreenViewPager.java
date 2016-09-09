@@ -128,7 +128,7 @@ public class FullScreenViewPager extends AppCompatActivity {
             super(fm);
             this.dataObjs = dataObjs;
             mCount = dataObjs.size();
-            System.out.println("COUNT: " + mCount);
+            System.out.println("COUNT 1: " + mCount);
             this.fm = fm;
         }
 
