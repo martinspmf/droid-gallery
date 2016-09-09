@@ -1,4 +1,29 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven' // ADD THIS
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'droid-gallery'
+
+    publishedGroupId = 'com.mobinteg.driodgallery'
+    libraryName = 'droidGallery'
+    artifact = 'droid-gallery'
+
+    libraryDescription = 'A simple image gallery for android'
+
+/*    siteUrl = 'https://github.com/nuuneoi/FBLikeAndroid'
+    gitUrl = 'https://github.com/nuuneoi/FBLikeAndroid.git'*/
+
+    libraryVersion = '1.0'
+
+    developerId = 'pmfmartins'
+    developerName = 'Pedro Martins'
+    developerEmail = 'martins.pmf@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
 
 android {
     compileSdkVersion 24
@@ -13,6 +38,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+
     buildTypes {
         release {
             minifyEnabled false
