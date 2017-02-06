@@ -7,6 +7,9 @@ import android.content.Intent;
 import java.util.ArrayList;
 
 public class SimpleGallery {
+
+    public static boolean zoom = true;
+
     /**
      *
      * @param context (context - Context you are in)
@@ -31,5 +34,9 @@ public class SimpleGallery {
         intent.putStringArrayListExtra("array", imgArray);
         intent.putExtra("position", 0);
         context.startActivity(intent);
+    }
+
+    public void allowZoom(boolean zoom) {
+        this.zoom = zoom;
     }
 }

@@ -94,7 +94,7 @@ public class FullScreenViewPager extends AppCompatActivity {
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
 
-                //myList.smoothScrollToPosition(position);
+                FullScreenViewPager.showRecView();
 
             }
 
@@ -121,6 +121,8 @@ public class FullScreenViewPager extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
 
 
     public class FullScreenAdapter extends FragmentPagerAdapter {
@@ -167,6 +169,24 @@ public class FullScreenViewPager extends AppCompatActivity {
             toolbar.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    public static void hideRecView() {
+        if (myList.getVisibility() == View.VISIBLE) {
+            myList.startAnimation(slideDownOut);
+            toolbar.startAnimation(slideUpOut);
+            toolbar.setVisibility(View.GONE);
+            myList.setVisibility(View.GONE);
+        }
+    }
+
+    public static void showRecView() {
+        if (myList.getVisibility() == View.GONE) {
+            myList.startAnimation(slideUpIn);
+            myList.setVisibility(View.VISIBLE);
+            toolbar.startAnimation(slideDownIn);
+            toolbar.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

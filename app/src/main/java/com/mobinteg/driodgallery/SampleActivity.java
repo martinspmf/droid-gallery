@@ -43,11 +43,13 @@ public class SampleActivity extends AppCompatActivity {
             imgArray.add("https://unsplash.it/" + width + "/" + height + "/?image=" + random);
         }
 
-        SimpleGallery.start(context, imgArray);
+        SimpleGallery gallery = new SimpleGallery();
+        gallery.allowZoom(false);
+        gallery.start(context, imgArray);
 
-        TextView gallery = (TextView) findViewById(R.id.gallery);
+        TextView galleryText = (TextView) findViewById(R.id.gallery);
 
-        gallery.setOnClickListener(new View.OnClickListener() {
+        galleryText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SimpleGallery.start(context, imgArray);
