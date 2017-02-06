@@ -22,6 +22,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
+import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
+import com.xgc1986.parallaxPagerTransformer.ParallaxPagerTransformer;
+
 import java.util.ArrayList;
 
 public class FullScreenViewPager extends AppCompatActivity {
@@ -74,6 +78,9 @@ public class FullScreenViewPager extends AppCompatActivity {
 
 
         viewPager = (ViewPager) findViewById(R.id.infinite_pager);
+        if (SimpleGallery.parallax) {
+            viewPager.setPageTransformer(true, new ParallaxPageTransformer(R.id.image));
+        }
 
         FullScreenAdapter adapter = new FullScreenAdapter(getSupportFragmentManager(), dataObjs);
 
@@ -198,6 +205,43 @@ public class FullScreenViewPager extends AppCompatActivity {
             default:
                 finish();
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public class ParallaxPageTransformer implements ViewPager.PageTransformer {
+        private int id;
+        private int border = 0;
+        private float speed = 0.2f;
+
+        public ParallaxPageTransformer(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void transformPage(View view, float position) {
+            View parallaxView = view.findViewById(id);
+            if (parallaxView != null) {
+                if (position > -1 && position < 1) {
+                    float width = parallaxView.getWidth();
+                    parallaxView.setTranslationX(-(position * width * speed));
+                    float sc = ((float) view.getWidth() - border) / view.getWidth();
+                    if (position == 0) {
+                        view.setScaleX(1);
+                        view.setScaleY(1);
+                    } else {
+                        view.setScaleX(sc);
+                        view.setScaleY(sc);
+                    }
+                }
+            }
+        }
+
+        public void setBorder(int px) {
+            border = px;
+        }
+
+        public void setSpeed(float speed) {
+            this.speed = speed;
         }
     }
 }

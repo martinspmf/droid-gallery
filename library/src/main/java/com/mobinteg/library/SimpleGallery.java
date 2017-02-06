@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class SimpleGallery {
 
     public static boolean zoom = true;
+    public static boolean parallax = true;
 
     /**
      *
@@ -36,7 +37,19 @@ public class SimpleGallery {
         context.startActivity(intent);
     }
 
-    public void allowZoom(boolean zoom) {
+    /**
+     *
+     * @param zoom (if true, zoom will be enable on the view - default true)
+     */
+    public void enableZoom(boolean zoom) {
         this.zoom = zoom;
+    }
+
+    /**
+     *
+     * @param parallax (if true, parallax animation will be enable on the view - default true)
+     */
+    public void enableParallax(boolean parallax) {
+        this.parallax = parallax;
     }
 }

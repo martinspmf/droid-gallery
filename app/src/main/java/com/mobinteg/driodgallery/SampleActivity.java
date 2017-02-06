@@ -40,11 +40,13 @@ public class SampleActivity extends AppCompatActivity {
             int width = (r.nextInt(500) + 300);
             int height = (r.nextInt(500) + 300);
 
-            imgArray.add("https://unsplash.it/" + width + "/" + height + "/?image=" + random);
+            imgArray.add("http://lorempixel.com/" + width + "/" + height + "/?random=" + random);
+          //  imgArray.add("https://unsplash.it/" + width + "/" + height + "/?image=" + random);
         }
 
         SimpleGallery gallery = new SimpleGallery();
-        gallery.allowZoom(false);
+        gallery.enableZoom(true);
+        gallery.enableParallax(true);
         gallery.start(context, imgArray);
 
         TextView galleryText = (TextView) findViewById(R.id.gallery);
