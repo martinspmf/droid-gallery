@@ -31,10 +31,16 @@ public class SampleActivity extends AppCompatActivity {
 
         final ArrayList<String> imgArray = new ArrayList<>();
 
+        Random r = new Random();
+
         for (int i = 0; i < 50; i++) {
             Random rand = new Random();
             int random = rand.nextInt(856) + 1;
-            imgArray.add("https://unsplash.it/350/350/?image=" + random);
+
+            int width = (r.nextInt(500) + 300);
+            int height = (r.nextInt(500) + 300);
+
+            imgArray.add("https://unsplash.it/" + width + "/" + height + "/?image=" + random);
         }
 
         SimpleGallery.start(context, imgArray);
