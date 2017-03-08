@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -21,6 +23,7 @@ public class FullScreenViewPagerFragment extends Fragment {
     String urlStr;
     public int position;
     private Context context;
+    private String descriptionStr = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,13 +31,27 @@ public class FullScreenViewPagerFragment extends Fragment {
 
         context = getActivity();
 
+        View view = inflater.inflate(R.layout.fragment_fullscreen_viewpager, container, false);
+
         try {
             urlStr = getArguments().getString("url", "");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        View view = inflater.inflate(R.layout.fragment_fullscreen_viewpager, container, false);
+
+        RelativeLayout descContainer = (RelativeLayout)  view.findViewById(R.id.description_container);
+        TextView descriptionTxt = (TextView)  view.findViewById(R.id.description);
+
+        descriptionStr = getArguments().getString("description", "");
+
+        if(descriptionStr.length()>0){
+            descContainer.setVisibility(View.VISIBLE);
+            descriptionTxt.setText(descriptionStr);
+
+        }else{
+            descContainer.setVisibility(View.GONE);
+        }
 
         if(SimpleGallery.zoom) {
             final ImageViewTouch image = (ImageViewTouch) view.findViewById(R.id.image);
@@ -79,6 +96,15 @@ public class FullScreenViewPagerFragment extends Fragment {
         FullScreenViewPagerFragment frag = new FullScreenViewPagerFragment();
         Bundle b = new Bundle();
         b.putString("url", url);
+        frag.setArguments(b);
+        return frag;
+    }
+
+    public static FullScreenViewPagerFragment newInstanceWithDescription (String url, String description) {
+        FullScreenViewPagerFragment frag = new FullScreenViewPagerFragment();
+        Bundle b = new Bundle();
+        b.putString("url", url);
+        b.putString("description", description);
         frag.setArguments(b);
         return frag;
     }

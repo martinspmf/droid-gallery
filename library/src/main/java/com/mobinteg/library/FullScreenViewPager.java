@@ -17,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -34,6 +35,7 @@ public class FullScreenViewPager extends AppCompatActivity {
     public static ViewPager viewPager;
     SlowerLinearLayoutManager llm;
     ArrayList<String> dataObjs = new ArrayList<String>();
+    ArrayList<String> descriptionObjs = new ArrayList<String>();
     TextView closeBtn;
     private int position;
     private int count;
@@ -73,6 +75,9 @@ public class FullScreenViewPager extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             dataObjs = extras.getStringArrayList("array");
+            if(extras.getStringArrayList("descriptionArray")!=null) {
+                descriptionObjs = extras.getStringArrayList("descriptionArray");
+            }
             position = extras.getInt("position", 0);
         }
 
@@ -119,9 +124,23 @@ public class FullScreenViewPager extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
         myList = (RecyclerView) findViewById(R.id.recycler_view);
         myList.setLayoutManager(llm);
+
+        if(SimpleGallery.showList){
+            myList.setVisibility(View.VISIBLE);
+        }else{
+            ViewGroup.LayoutParams params = myList.getLayoutParams();
+            params.height = 0;
+            myList.setLayoutParams(params);
+            myList.requestLayout();
+            myList.setVisibility(View.GONE);
+        }
+
         recAdapter = new RecyclerViewAdapter(context, dataObjs);
         myList.setAdapter(recAdapter);
         myList.smoothScrollToPosition(position);
+
+
+
     }
 
     @Override
@@ -148,7 +167,11 @@ public class FullScreenViewPager extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return FullScreenViewPagerFragment.newInstance(dataObjs.get(position));
+            if(descriptionObjs.size()>0){
+                return FullScreenViewPagerFragment.newInstanceWithDescription(dataObjs.get(position), descriptionObjs.get(position));
+            } else {
+                return FullScreenViewPagerFragment.newInstance(dataObjs.get(position));
+            }
         }
 
         @Override
